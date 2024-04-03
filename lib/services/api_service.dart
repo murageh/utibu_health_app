@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:utibu_health_app/models/medication.dart';
 import 'package:utibu_health_app/models/order.dart';
@@ -9,7 +10,7 @@ import 'package:utibu_health_app/models/prescription.dart';
 import '../models/user.dart';
 
 class ApiService {
-  final _baseUrl = 'http://10.0.2.2:3000/api'; // localhost
+  final _baseUrl = '${dotenv.env['API_URL']}/api';
 
   Future<User?> login(String email, String password) async {
     final response = await http.post(

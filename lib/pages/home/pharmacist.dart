@@ -26,6 +26,7 @@ class PharmacistHomePage extends StatelessWidget {
         appBar: buildAppBar(
           context,
           title,
+          showBackButton: false,
         ),
         body: Padding(
           padding: const EdgeInsets.all(0.0),

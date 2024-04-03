@@ -28,6 +28,7 @@ class _PatientHomePageState extends State<PatientHomePage> {
         appBar: buildAppBar(
           context,
           title,
+          showBackButton: false,
         ),
         body: Padding(
           padding: const EdgeInsets.all(0.0),
