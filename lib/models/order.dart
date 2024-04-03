@@ -1,21 +1,21 @@
-
+import 'package:intl/intl.dart';
 import 'package:utibu_health_app/models/prescription.dart';
 
 class Order {
   final int orderId;
   final int userId;
-  final int medicationId;
-  final int quantity;
-  final DateTime orderDate;
+  final String orderDate;
   final String orderStatus;
   final String paymentStatus;
   final Prescription prescription;
 
+  get dateString => DateFormat('yyyy-MM-dd').format(DateTime.parse(orderDate));
+
+  DateTime get date => DateTime.parse(orderDate);
+
   Order({
     required this.orderId,
     required this.userId,
-    required this.medicationId,
-    required this.quantity,
     required this.orderDate,
     required this.orderStatus,
     required this.paymentStatus,
@@ -25,9 +25,7 @@ class Order {
   Order copyWith({
     required int orderId,
     required int userId,
-    required int medicationId,
-    required int quantity,
-    required DateTime orderDate,
+    required String orderDate,
     required String orderStatus,
     required String paymentStatus,
     required Prescription prescription,
@@ -35,8 +33,6 @@ class Order {
     return Order(
       orderId: orderId ?? this.orderId,
       userId: userId ?? this.userId,
-      medicationId: medicationId ?? this.medicationId,
-      quantity: quantity ?? this.quantity,
       orderDate: orderDate ?? this.orderDate,
       orderStatus: orderStatus ?? this.orderStatus,
       paymentStatus: paymentStatus ?? this.paymentStatus,
@@ -49,8 +45,6 @@ class Order {
 
     m['order_id'] = orderId;
     m['user_id'] = userId;
-    m['medication_id'] = medicationId;
-    m['quantity'] = quantity;
     m['order_date'] = orderDate;
     m['order_status'] = orderStatus;
     m['payment_status'] = paymentStatus;
@@ -63,8 +57,6 @@ class Order {
     return Order(
       orderId: m['order_id'],
       userId: m['user_id'],
-      medicationId: m['medication_id'],
-      quantity: m['quantity'],
       orderDate: m['order_date'],
       orderStatus: m['order_status'],
       paymentStatus: m['payment_status'],

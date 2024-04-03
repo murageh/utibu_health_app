@@ -102,6 +102,10 @@ class ApiService {
       },
     );
 
+    if (kDebugMode) {
+      print('getOrders: ${response.body}'); // 'getOrders: []'
+    }
+
     if (response.statusCode == 200) {
       final jsonBody = json.decode(response.body);
       final List<dynamic> list = jsonBody['data'];
@@ -116,6 +120,31 @@ class ApiService {
   }
 
   // MEDICATION
+
+  Future<List<String>> getMedicationUnits(String? token) async {
+    final response = await http.get(
+      Uri.parse('$_baseUrl/medication/units'),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (kDebugMode) {
+      print('getMedicationUnits: ${response.body}'); // 'getMedicationUnits: []'
+    }
+
+    if (response.statusCode == 200) {
+      final jsonBody = json.decode(response.body);
+      final List<dynamic> list = jsonBody['data'];
+      var units = <String>[];
+      for (var unit in list) {
+        units.add(unit);
+      }
+      return units;
+    }
+
+    return List<String>.empty();
+  }
 
   Future<List<Medication>> getMedications(String? token) async {
     final response = await http.get(
@@ -246,6 +275,35 @@ class ApiService {
     } catch (e) {
       if (kDebugMode) {
         print('createPrescription error: $e');
+      }
+      return false;
+    }
+  }
+
+  // ORDER
+  Future<bool> createOrder(
+      int userId, int prescriptionId, String? token) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$_baseUrl/orders'),
+        body: json.encode({
+          'user_id': userId,
+          'prescription_id': prescriptionId,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      if (kDebugMode) {
+        print('createOrder: ${response.body}'); // 'createOrder: {}'
+      }
+
+      return response.statusCode == 201;
+    } catch (e) {
+      if (kDebugMode) {
+        print('createOrder error: $e');
       }
       return false;
     }

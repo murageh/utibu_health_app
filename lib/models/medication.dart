@@ -2,6 +2,7 @@
 class Medication {
   final int medicationId;
   final String name;
+  final String unit;
   final String description;
   int stockLevel;
   final double price;
@@ -14,6 +15,7 @@ class Medication {
     required this.medicationId,
     required this.name,
     required this.description,
+    required this.unit,
     required this.stockLevel,
     required this.price,
   });
@@ -22,6 +24,7 @@ class Medication {
     required int medicationId,
     required String name,
     required String description,
+    required String unit,
     required int stockLevel,
     required double price,
   }) {
@@ -29,6 +32,7 @@ class Medication {
       medicationId: medicationId ?? this.medicationId,
       name: name ?? this.name,
       description: description ?? this.description,
+      unit: unit ?? this.unit,
       stockLevel: stockLevel ?? this.stockLevel,
       price: price ?? this.price,
     );
@@ -39,6 +43,7 @@ class Medication {
     m['medication_id'] = medicationId;
     m['name'] = name;
     m['description'] = description;
+    m['unit'] = unit;
     m['stock_level'] = stockLevel;
     m['price'] = price;
 
@@ -50,6 +55,7 @@ class Medication {
       medicationId: m['medication_id'],
       name: m['name'],
       description: m['description'],
+      unit: m['unit'],
       stockLevel: m['stock_level'],
       price: double.parse(m['price'].toString()),
     );

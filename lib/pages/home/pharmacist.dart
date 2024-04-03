@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:utibu_health_app/components/app_bar.dart';
-import 'package:utibu_health_app/pages/forms/new_medication.dart';
-import 'package:utibu_health_app/pages/forms/new_prescription.dart';
+import 'package:utibu_health_app/pages/home/modal_sheet.dart';
 import 'package:utibu_health_app/pages/lists/medication_list.dart';
 import 'package:utibu_health_app/pages/lists/order_list.dart';
 import 'package:utibu_health_app/pages/lists/prescription_list.dart';
@@ -81,41 +80,7 @@ class PharmacistHomePage extends StatelessWidget {
             showModalBottomSheet(
               context: context,
               builder: (BuildContext context) {
-                return Container(
-                  margin: const EdgeInsets.symmetric(vertical: 32.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      ListTile(
-                        leading: const Icon(Icons.medical_services),
-                        title: const Text('New Medication'),
-                        subtitle: const Text('Add a new drug to your inventory'),
-                        isThreeLine: true,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const NewMedicationPage()),
-                          );
-                        },
-                      ),
-                      const Divider(),
-                      ListTile(
-                        leading: const Icon(Icons.medical_services),
-                        title: const Text('New Prescription'),
-                        subtitle: const Text('Create a new prescription on behalf of a patient'),
-                        isThreeLine: true,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const NewPrescriptionPage()),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                );
+                return modalSheetContent(context, pharmacistItems(context));
               },
             );
           },

@@ -12,6 +12,7 @@ class Prescription {
   final String prescriptionDate;
   final String dosage;
   final int refillCount;
+  final int quantity;
 
   String get dateString => DateFormat('yyyy-MM-dd').format(DateTime.parse(prescriptionDate));
 
@@ -24,6 +25,7 @@ class Prescription {
     this.user,
     required this.doctorName,
     required this.prescriptionDate,
+    required this.quantity,
     required this.dosage,
     required this.refillCount,
   });
@@ -35,6 +37,7 @@ class Prescription {
     User? user,
     required String doctorName,
     required String prescriptionDate,
+    required int quantity,
     required String dosage,
     required int refillCount,
   }) {
@@ -46,6 +49,7 @@ class Prescription {
       doctorName: doctorName ?? this.doctorName,
       prescriptionDate: prescriptionDate ?? this.prescriptionDate,
       dosage: dosage ?? this.dosage,
+      quantity: quantity ?? this.quantity,
       refillCount: refillCount ?? this.refillCount,
     );
   }
@@ -60,6 +64,7 @@ class Prescription {
     m['doctor_name'] = doctorName;
     m['prescription_date'] = prescriptionDate;
     m['dosage'] = dosage;
+    m['quantity'] = quantity;
     m['refill_count'] = refillCount;
 
     return m;
@@ -74,6 +79,7 @@ class Prescription {
       doctorName: m['doctor_name'],
       prescriptionDate: m['prescription_date'],
       dosage: m['dosage'],
+      quantity: m['quantity'],
       refillCount: m['refill_count'],
     );
   }
@@ -85,6 +91,7 @@ class NewPrescription {
   final String doctorName;
   final String prescriptionDate;
   final String dosage;
+  final int quantity;
   final int refillCount;
 
   String get dateString => DateFormat('yyyy-MM-dd').format(DateTime.parse(prescriptionDate));
@@ -97,6 +104,7 @@ class NewPrescription {
     required this.doctorName,
     required this.prescriptionDate,
     required this.dosage,
+    required this.quantity,
     required this.refillCount,
   });
 
@@ -108,6 +116,7 @@ class NewPrescription {
     m['doctor_name'] = doctorName;
     m['prescription_date'] = prescriptionDate;
     m['dosage'] = dosage;
+    m['quantity'] = quantity;
     m['refill_count'] = refillCount;
 
     return m;

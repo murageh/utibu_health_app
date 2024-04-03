@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:utibu_health_app/components/app_bar.dart';
 import 'package:utibu_health_app/components/inputs.dart';
@@ -26,16 +24,20 @@ class _NewPrescriptionPageState extends State<NewPrescriptionPage> {
   final List<Medication> medications = [];
   bool _shouldChooseUser = false;
 
-  // fields: userId, medicationId, doctorName, prescriptionDate, dosage, refillCount
+  Medication? _selectedMedication;
+
+  // fields: userId, medicationId, doctorName, prescriptionDate, quantity, dosage, refillCount
   TextEditingController userIdController = TextEditingController();
   TextEditingController medicationIdController = TextEditingController();
   TextEditingController doctorNameController = TextEditingController();
   TextEditingController prescriptionDateController = TextEditingController();
   TextEditingController dosageController = TextEditingController();
   TextEditingController refillCountController = TextEditingController();
+  TextEditingController quantityCountController = TextEditingController();
 
   void getMedications(String? token) async {
     await ApiService().getMedications(token).then((value) {
+      medications.clear();
       setState(() {
         medications.addAll(value);
       });
@@ -44,6 +46,7 @@ class _NewPrescriptionPageState extends State<NewPrescriptionPage> {
 
   void getUsers(String? token) async {
     await ApiService().getUsers(token).then((value) {
+      users.clear();
       setState(() {
         users.addAll(value);
       });
@@ -80,7 +83,8 @@ class _NewPrescriptionPageState extends State<NewPrescriptionPage> {
           doctorName: doctorNameController.text,
           prescriptionDate: prescriptionDateController.text,
           dosage: dosageController.text,
-          refillCount: int.parse(refillCountController.text),
+          refillCount: int.tryParse(refillCountController.text) ?? -1,
+          quantity: int.tryParse(quantityCountController.text) ?? -1,
         ),
         token,
       )
@@ -154,7 +158,7 @@ class _NewPrescriptionPageState extends State<NewPrescriptionPage> {
                   else
                     Container(),
                   RoundedDropdownButtonFormField<Medication>(
-                    value: null,
+                    value: _selectedMedication,
                     items: medications
                         .map((medication) => DropdownMenuItem(
                               value: medication,
@@ -162,6 +166,9 @@ class _NewPrescriptionPageState extends State<NewPrescriptionPage> {
                             ))
                         .toList(),
                     onChanged: (Medication? value) {
+                      setState(() {
+                        _selectedMedication = value;
+                      });
                       medicationIdController.text = value != null
                           ? value.medicationId.toString()
                           : medicationIdController.text;
@@ -215,6 +222,20 @@ class _NewPrescriptionPageState extends State<NewPrescriptionPage> {
                           },
                           icon: const Icon(Icons.calendar_today)),
                     ),
+                  ),
+                  RoundedTextField(
+                    controller: quantityCountController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Please enter the quantity";
+                      }
+                      return null;
+                    },
+                    hintText:
+                        "How many ${_selectedMedication?.unit != null ? "${_selectedMedication?.unit}(s)" : "units"}",
+                    helperText: _selectedMedication == null
+                        ? "Please select a medication"
+                        : "${_selectedMedication?.name} is measured in ${_selectedMedication?.unit}(s)",
                   ),
                   RoundedTextField(
                     controller: dosageController,

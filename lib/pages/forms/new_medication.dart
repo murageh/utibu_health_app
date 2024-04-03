@@ -7,6 +7,12 @@ import 'package:utibu_health_app/pages/login_page.dart';
 import 'package:utibu_health_app/providers/identity/Identityprovider.dart';
 import 'package:utibu_health_app/services/api_service.dart';
 
+class UnitItem {
+  final String unit;
+
+  UnitItem(this.unit);
+}
+
 class NewMedicationPage extends StatefulWidget {
   const NewMedicationPage({super.key});
 
@@ -18,12 +24,30 @@ class _NewMedicationPageState extends State<NewMedicationPage> {
   final String title = 'New medication';
   final _formKey = GlobalKey<FormState>();
   bool _isCreating = false;
+  List<UnitItem> units = [];
 
-  // fields: name, description, stock_level, price
+  // fields: name, description, stock_level, price, unit
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+  TextEditingController unitController = TextEditingController();
   TextEditingController stockLevelController = TextEditingController();
   TextEditingController priceController = TextEditingController();
+
+  getUnits(String? token) async {
+    await ApiService().getMedicationUnits(token).then((value) {
+      setState(() {
+        units = value.map((unit) => UnitItem(unit)).toList();
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    IdentityProvider identityProvider =
+        Provider.of<IdentityProvider>(context, listen: false);
+    getUnits(identityProvider.identity?['token']);
+  }
 
   void createMedication(String? token) async {
     if (_formKey.currentState!.validate()) {
@@ -36,6 +60,7 @@ class _NewMedicationPageState extends State<NewMedicationPage> {
           medicationId: 0,
           name: nameController.text,
           description: descriptionController.text,
+          unit: unitController.text,
           stockLevel: int.parse(stockLevelController.text),
           price: double.parse(priceController.text),
         ),
@@ -108,6 +133,27 @@ class _NewMedicationPageState extends State<NewMedicationPage> {
                       return null;
                     },
                     hintText: "Medication Description",
+                  ),
+                  RoundedDropdownButtonFormField<UnitItem>(
+                    value: null,
+                    items: units
+                        .map(
+                          (unit) => DropdownMenuItem(
+                            value: unit,
+                            child: Text(unit.unit),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (UnitItem? value) {
+                      unitController.text = value!.unit;
+                    },
+                    validator: (value) {
+                      if (value == null) {
+                        return "Please select the medication unit";
+                      }
+                      return null;
+                    },
+                    hintText: "Unit",
                   ),
                   RoundedTextField(
                     controller: stockLevelController,

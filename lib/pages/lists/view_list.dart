@@ -58,7 +58,9 @@ class ViewList extends StatelessWidget {
             onTap: items[index].onTap,
             trailing: Icon(items[index].icon),
             tileColor: items[index].backgroundColor,
-            titleTextStyle: TextStyle(color: items[index].foregroundColor),
+            titleTextStyle: TextStyle(
+                color: items[index].foregroundColor,
+                fontWeight: FontWeight.bold),
             subtitleTextStyle: TextStyle(color: items[index].foregroundColor),
           );
         },
