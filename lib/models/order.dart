@@ -1,5 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:utibu_health_app/models/prescription.dart';
+import 'package:utibu_health_app/models/user.dart';
 
 class Order {
   final int orderId;
@@ -8,6 +9,7 @@ class Order {
   final String orderStatus;
   final String paymentStatus;
   final Prescription prescription;
+  final User? user;
 
   get dateString => DateFormat('yyyy-MM-dd').format(DateTime.parse(orderDate));
 
@@ -20,6 +22,7 @@ class Order {
     required this.orderStatus,
     required this.paymentStatus,
     required this.prescription,
+    this.user,
   });
 
   Order copyWith({
@@ -29,6 +32,7 @@ class Order {
     required String orderStatus,
     required String paymentStatus,
     required Prescription prescription,
+    User? user,
   }) {
     return Order(
       orderId: orderId ?? this.orderId,
@@ -37,6 +41,7 @@ class Order {
       orderStatus: orderStatus ?? this.orderStatus,
       paymentStatus: paymentStatus ?? this.paymentStatus,
       prescription: prescription ?? this.prescription,
+      user: user ?? this.user,
     );
   }
 
@@ -49,6 +54,7 @@ class Order {
     m['order_status'] = orderStatus;
     m['payment_status'] = paymentStatus;
     m['prescription'] = prescription.toJSON();
+    m['user'] = user?.toJSON();
 
     return m;
   }
@@ -61,6 +67,7 @@ class Order {
       orderStatus: m['order_status'],
       paymentStatus: m['payment_status'],
       prescription: Prescription.fromJSON(m['prescription']),
+      user: m['user'] == null ? null : User.fromJSON(m['user']),
     );
   }
 }

@@ -1,7 +1,7 @@
 class User {
   final int userId;
   final String username;
-  final String password;
+  final String? password;
   final String firstName;
   final String lastName;
   final String phoneNumber;
@@ -11,7 +11,7 @@ class User {
   User(this.token, {
     required this.userId,
     required this.username,
-    required this.password,
+    this.password,
     required this.firstName,
     required this.lastName,
     required this.phoneNumber,
@@ -28,7 +28,7 @@ class User {
   User copyWith(String? token, {
     required int userId,
     required String username,
-    required String password,
+    String? password,
     required String firstName,
     required String lastName,
     required String phoneNumber,

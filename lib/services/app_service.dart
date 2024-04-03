@@ -1,7 +1,3 @@
-import 'dart:convert';
-
-import 'package:http/http.dart' as http;
-
 import '../models/user.dart';
 import 'api_service.dart';
 import 'shared_preferences_service.dart';
@@ -13,7 +9,7 @@ class AppService {
   Future<void> login(User user) async {
     final response = await _api.login(
       user.username,
-      user.password,
+      user.password ?? '',
     );
 
     if (response != null) {
