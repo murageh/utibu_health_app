@@ -8,7 +8,6 @@ frontend and Node.js, Express, and Sequelize for the backend.
 Table of Contents
 -----------------
 <!-- TOC -->
-
 * [Utibu Health Mobile App](#utibu-health-mobile-app)
   * [Table of Contents](#table-of-contents)
   * [Installation](#installation)
@@ -20,7 +19,6 @@ Table of Contents
   * [Contributing](#contributing)
   * [Screenshots](#screenshots)
   * [License](#license)
-
 <!-- TOC -->
 
 Installation
@@ -28,8 +26,8 @@ Installation
 
 To install and run the app locally, follow these steps:
 
-1. Clone the frontend repository: git clone https://github.com/murageh/utibu_health_app.git`
-2. Clone the backend repository: git clone https://github.com/murageh/utibu_health_backend.git`
+1. Clone the frontend repository: git clone https://github.com/murageh/utibu_health_app.git
+2. Clone the backend repository: git clone https://github.com/murageh/utibu_health_backend.git
 3. Navigate to the backend directory: `cd utibu-health/backend` _(be sure to replace the folder
    name)_
 4. Install the dependencies: `npm install`
