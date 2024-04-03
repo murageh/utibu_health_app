@@ -50,7 +50,6 @@ class _OrderListState extends State<OrderList> {
           title: 'Orders',
           items: orders.map((order) {
             var f = DateFormat('yyyy-MM-dd');
-            var detailedF = DateFormat('yyyy-MM-dd HH:mm:ss');
 
             var totalPrice = order.prescription.medication != null
                 ? order.prescription.medication!.price *
@@ -64,6 +63,7 @@ class _OrderListState extends State<OrderList> {
 
             var title =
                 '${order.prescription.medication?.name} $user ($shortDate)';
+
             var subtitle =
                 'Order: ${order.orderStatus} - Payment: ${order.paymentStatus}';
             var thirdLine = 'Total: KES $totalPrice';

@@ -55,7 +55,9 @@ class _MedicationListState extends State<MedicationList> {
               .map((medication) => Item(
                   title: medication.name,
                   subtitle:
-                      '${medication.description}: KES ${medication.price}',
+                  '${medication.description}: KES ${medication
+                      .price}\nRemaining Stock: ${medication
+                      .stockLevel} ${medication.unit}(s)',
                   backgroundColor: medication.stockLevel > 10
                       ? Colors.green.shade50
                       : medication.stockLevel > 5
