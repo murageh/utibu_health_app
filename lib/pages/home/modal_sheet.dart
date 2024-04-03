@@ -57,10 +57,36 @@ List<ModalSheetItem> userItems(BuildContext context) => [
             'Record a new prescription for your medication. Prescription will be verified by the pharmacist',
         isThreeLine: true,
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const NewPrescriptionPage()),
+          // show confirmation dialog that the pharmacist will have to verify this prescription before the user can pay or pick it up
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text('New Prescription'),
+                content: const Text(
+                  'Are you sure you want to create a new prescription?\nPrescriptions will be verified by the pharmacist before you can pay or pick it up',
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Cancel'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const NewPrescriptionPage()),
+                      );
+                    },
+                    child: const Text('Create'),
+                  ),
+                ],
+              );
+            },
           );
         },
       ),
