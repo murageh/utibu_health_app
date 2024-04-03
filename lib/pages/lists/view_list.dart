@@ -50,6 +50,8 @@ class ViewList extends StatelessWidget {
       child: ListView.separated(
         itemBuilder: (context, index) {
           return ListTile(
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
             title: Text(items[index].title),
             isThreeLine: items[index].thirdLine != null,
             subtitle: Text(
@@ -59,6 +61,7 @@ class ViewList extends StatelessWidget {
             trailing: Icon(items[index].icon),
             tileColor: items[index].backgroundColor,
             titleTextStyle: TextStyle(
+                fontSize: 16.0,
                 color: items[index].foregroundColor,
                 fontWeight: FontWeight.bold),
             subtitleTextStyle: TextStyle(color: items[index].foregroundColor),

@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:utibu_health_app/components/app_bar.dart';
-import 'package:utibu_health_app/models/medication.dart';
-import 'package:utibu_health_app/models/order.dart';
 import 'package:utibu_health_app/models/prescription.dart';
-import 'package:utibu_health_app/models/user.dart';
 import 'package:utibu_health_app/pages/lists/view_list.dart';
 import 'package:utibu_health_app/pages/login_page.dart';
 import 'package:utibu_health_app/providers/identity/Identityprovider.dart';
@@ -19,7 +16,7 @@ class PrescriptionList extends StatefulWidget {
 }
 
 class _PrescriptionListState extends State<PrescriptionList> {
-  String title = 'Prescription';
+  String title = 'Prescriptions';
   List<Prescription> prescriptions = [];
 
   void getPrescriptions(String? token) async {
@@ -60,6 +57,7 @@ class _PrescriptionListState extends State<PrescriptionList> {
                   title: '${prescriptions.medication?.name} (${prescriptions.dosage})',
                   subtitle: '${f.format(prescriptions.date)} by ${prescriptions.doctorName}',
                   thirdLine: 'For ${prescriptions.user?.name}',
+                  backgroundColor: Colors.blue.shade50,
                   onTap: () {
                     showDialog(
                       context: context,

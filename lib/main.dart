@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:utibu_health_app/pages/home/patient.dart';
 import 'package:utibu_health_app/pages/home/pharmacist.dart';
 import 'package:utibu_health_app/pages/login_page.dart';
-import 'package:utibu_health_app/pages/register_page.dart';
 
-import 'models/user.dart';
 import 'providers/identity/Identityprovider.dart';
 
 void main() {
@@ -30,7 +29,11 @@ class MyApp extends StatelessWidget {
       title: 'Utibu Health',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+      ).copyWith(
+        textTheme: GoogleFonts.poppinsTextTheme(),
+        scaffoldBackgroundColor: Colors.blue.shade50,
       ),
+      debugShowCheckedModeBanner: false,
       home: Consumer<IdentityProvider>(
         builder: (context, identityProvider, child) {
           var isLoggedin = identityProvider.isLoggedIn;

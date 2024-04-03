@@ -73,10 +73,10 @@ class _OrderListState extends State<OrderList> {
                 subtitle: subtitle,
                 thirdLine: thirdLine,
                 backgroundColor: order.orderStatus == 'Pending'
-                    ? Colors.white
+                    ? Colors.blue.shade50
                     : order.orderStatus == 'Verified'
                         ? (order.paymentStatus != 'Paid'
-                            ? Colors.yellow.shade100
+                            ? Colors.green.shade50
                             : Colors.green.shade100)
                         : Colors.red.shade100,
                 onTap: () {

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:utibu_health_app/components/app_bar.dart';
-import 'package:utibu_health_app/components/inputs.dart';
 import 'package:utibu_health_app/models/medication.dart';
-import 'package:utibu_health_app/models/order.dart';
-import 'package:utibu_health_app/models/user.dart';
 import 'package:utibu_health_app/pages/lists/view_list.dart';
 import 'package:utibu_health_app/pages/login_page.dart';
 import 'package:utibu_health_app/providers/identity/Identityprovider.dart';
@@ -59,10 +56,10 @@ class _MedicationListState extends State<MedicationList> {
                       .price}\nRemaining Stock: ${medication
                       .stockLevel} ${medication.unit}(s)',
                   backgroundColor: medication.stockLevel > 10
-                      ? Colors.green.shade50
+                      ? Colors.green.shade100
                       : medication.stockLevel > 5
-                          ? Colors.orange.shade50
-                          : Colors.red.shade50,
+                          ? Colors.orange.shade100
+                          : Colors.red.shade100,
                   onTap: () {
                     showDialog(
                       context: context,

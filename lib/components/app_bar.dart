@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:utibu_health_app/pages/login_page.dart';
 import 'package:utibu_health_app/providers/identity/Identityprovider.dart';
 
-AppBar buildAppBar(BuildContext context, String title) {
+AppBar buildAppBar(BuildContext context, String title, {bool? showBackButton}) {
   return AppBar(
     title: Text(title),
     backgroundColor: Theme.of(context).primaryColor,
     foregroundColor: Colors.white,
+    leading: showBackButton == true
+        ? IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          )
+        : null,
     actions: <Widget>[
       IconButton(
         icon: const Icon(Icons.logout),

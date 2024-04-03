@@ -48,6 +48,16 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 16.0),
+                        child: Image.asset(
+                          'assets/images/icon.png',
+                          width: 180,
+                        ),
+                      ),
+                    ),
                     const Text(
                       "Utibu Health",
                       textAlign: TextAlign.left,

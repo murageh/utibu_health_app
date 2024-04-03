@@ -52,10 +52,10 @@ class _UserListState extends State<UserList> {
                   title: '${user.name}',
                   subtitle: '${user.phoneNumber} - ${user.role}',
                   backgroundColor: user.role == 'pharmacist'
-                      ? Colors.green.shade50
+                      ? Colors.green.shade100
                       : user.role == 'patient'
-                          ? Colors.blue.shade50
-                          : Colors.grey.shade50,
+                          ? Colors.blue.shade100
+                          : Colors.grey.shade100,
                   onTap: () {
                     showDialog(
                       context: context,
